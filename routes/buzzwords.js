@@ -22,7 +22,7 @@ router.route('/')
   })
   .put(function(req, res) {
     var buzzWord = req.body.buzzWord;
-    var heard = req.body.heard;
+    var heard = Boolean(req.body.heard);
     var buzzWords = req.bingo.buzzWords;
     var newScore = req.bingo.buzzWords;
 
@@ -30,7 +30,11 @@ router.route('/')
       for(var i = 0; i < buzzWords.length; i++) {
         if(buzzWords[i].buzzWord === buzzWord) {
           buzzWords[i].heard = heard;
-          req.bingo.score += parseInt(buzzWords[i].points);
+          if(heard === true) {
+            req.bingo.score += parseInt(buzzWords[i].points);
+          } else if (heard === false) {
+            req.bingo.score -= parseInt(buzzWords[i].points);
+          }
         }
       }
       res.json({ success : true, newScore: req.bingo.score });
