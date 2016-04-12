@@ -22,12 +22,12 @@ router.route('/')
     var buzzWord = req.body.buzzWord;
     var heard = Boolean(req.body.heard);
     var buzzWords = req.bingo.buzzWords;
-    var newScore = req.bingo.buzzWords;
 
     for(var i = 0; i < buzzWords.length; i++) {
       if(buzzWords[i].buzzWord === buzzWord) {
         buzzWords[i].heard = heard;
         if(heard === true) {
+          console.log(buzzWords[i].points);
           req.bingo.score += parseInt(buzzWords[i].points);
         } else if (heard === false) {
           req.bingo.score -= parseInt(buzzWords[i].points);

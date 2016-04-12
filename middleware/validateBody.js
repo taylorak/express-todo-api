@@ -1,6 +1,7 @@
 function validateBody(bodyParams) {
   return function(req, res, next) {
     var body = req.body;
+
     var isValid = Object.keys(bodyParams).every(function(key) {
 
       if(bodyParams[key] === 'number'){
